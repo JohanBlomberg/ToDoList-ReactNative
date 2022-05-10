@@ -8,40 +8,40 @@ export default function App() {
 
   const [bucket, setBucket] = useState('Hej')
 
-  const data = { username: 'example'};
 
-  const addBucket = () => {
-    fetch("api/buckets", {
-      method: 'POST',
-      headers: {'Content-type': 'application/json'},
-      body: JSON.stringify(data)
-    })
-    .then(response => response.json())
-    .then (data => {
-      console.log('Success', data)
-    })
-    .catch((error) => {
-      console.error('Error', error)
-    })
 
+  const addBucket = () => { 
+   fetch("http://127.0.0.1:3002/api/buckets", {
+    method: 'POST',
+    headers: {'Content-Type': 'application/json; charset=utf-8'},
+    body: JSON.stringify(bucket),
+    mode: 'no-cors'
+   })
+  .then(response => response.json())
+  .then((data) => {
+  console.log(data)
+   })
+   .catch((error) => {
+     console.log(error)
+   })
   }
 
 
   return (
     <SafeAreaView style={styles.container}>
       <StatusBar style="auto" />
-      <Image source={require ('./image/Logo.jpg')}/>
+      <Image source={require ('./image/Logo.png')}/>
       <DataTable>
         <DataTable.Header>
-          <DataTable.Title>Hink</DataTable.Title>
-          <DataTable.Title>Färg</DataTable.Title>
-          <DataTable.Title>Köpt</DataTable.Title>
+          <DataTable.Title>Faktura</DataTable.Title>
+          <DataTable.Title>Summa</DataTable.Title>
+          <DataTable.Title>Utfrd</DataTable.Title>
         </DataTable.Header>
         <DataTable.Row>
-          <DataTable.Cell>Biltema 5 Liter</DataTable.Cell>
-          <DataTable.Cell>Blå</DataTable.Cell>
+          <DataTable.Cell>Biltema</DataTable.Cell>
+          <DataTable.Cell>300 kr</DataTable.Cell>
           <DataTable.Cell><Button
-          title="Klar" 
+          title="Betald" 
           onPress={addBucket}/></DataTable.Cell>
         </DataTable.Row>
 
@@ -72,9 +72,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     alignItems: 'center',
     justifyContent: 'center',
-    marginTop: 50
+    marginTop: -300
   },
-  marvel: {
 
-  }
 });
